@@ -28,165 +28,172 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanelCache = new System.Windows.Forms.TableLayoutPanel();
-            this.labelCache = new System.Windows.Forms.Label();
-            this.RichTextBoxCache = new System.Windows.Forms.RichTextBox();
-            this.buttonDatabaseToCache = new System.Windows.Forms.Button();
-            this.tableLayoutPanelDatabase = new System.Windows.Forms.TableLayoutPanel();
-            this.labelDatabase = new System.Windows.Forms.Label();
-            this.richTextBoxDatabase = new System.Windows.Forms.RichTextBox();
-            this.buttonPlus = new System.Windows.Forms.Button();
-            this.buttonMinus = new System.Windows.Forms.Button();
-            this.buttonValue = new System.Windows.Forms.Button();
-            this.buttonApply = new System.Windows.Forms.Button();
-            this.buttonReset = new System.Windows.Forms.Button();
-            this.tableLayoutPanelCache.SuspendLayout();
-            this.tableLayoutPanelDatabase.SuspendLayout();
+            this.TableLayoutPanelCache = new System.Windows.Forms.TableLayoutPanel();
+            this.LabelCache = new System.Windows.Forms.Label();
+            this.ButtonDatabaseToCache = new System.Windows.Forms.Button();
+            this.TableLayoutPanelDatabase = new System.Windows.Forms.TableLayoutPanel();
+            this.LabelDatabase = new System.Windows.Forms.Label();
+            this.ButtonMinus = new System.Windows.Forms.Button();
+            this.ButtonPlus = new System.Windows.Forms.Button();
+            this.ButtonValue = new System.Windows.Forms.Button();
+            this.ButtonApply = new System.Windows.Forms.Button();
+            this.ButtonReset = new System.Windows.Forms.Button();
+            this.TreeViewDataBase = new Tree.MyTreeView();
+            this.TreeViewCache = new Tree.MyTreeView();
+            this.TableLayoutPanelCache.SuspendLayout();
+            this.TableLayoutPanelDatabase.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tableLayoutPanelCache
+            // TableLayoutPanelCache
             // 
-            this.tableLayoutPanelCache.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanelCache.ColumnCount = 1;
-            this.tableLayoutPanelCache.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelCache.Controls.Add(this.labelCache, 0, 0);
-            this.tableLayoutPanelCache.Controls.Add(this.RichTextBoxCache, 0, 1);
-            this.tableLayoutPanelCache.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanelCache.Name = "tableLayoutPanelCache";
-            this.tableLayoutPanelCache.RowCount = 2;
-            this.tableLayoutPanelCache.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.385093F));
-            this.tableLayoutPanelCache.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.61491F));
-            this.tableLayoutPanelCache.Size = new System.Drawing.Size(387, 419);
-            this.tableLayoutPanelCache.TabIndex = 33;
-            this.tableLayoutPanelCache.TabStop = true;
+            this.TableLayoutPanelCache.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.TableLayoutPanelCache.ColumnCount = 1;
+            this.TableLayoutPanelCache.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayoutPanelCache.Controls.Add(this.LabelCache, 0, 0);
+            this.TableLayoutPanelCache.Controls.Add(this.TreeViewCache, 0, 1);
+            this.TableLayoutPanelCache.Location = new System.Drawing.Point(12, 12);
+            this.TableLayoutPanelCache.Name = "TableLayoutPanelCache";
+            this.TableLayoutPanelCache.RowCount = 2;
+            this.TableLayoutPanelCache.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.385093F));
+            this.TableLayoutPanelCache.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.61491F));
+            this.TableLayoutPanelCache.Size = new System.Drawing.Size(387, 419);
+            this.TableLayoutPanelCache.TabIndex = 33;
+            this.TableLayoutPanelCache.TabStop = true;
             // 
-            // labelCache
+            // LabelCache
             // 
-            this.labelCache.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.LabelCache.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelCache.AutoSize = true;
-            this.labelCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCache.Location = new System.Drawing.Point(4, 1);
-            this.labelCache.Name = "labelCache";
-            this.labelCache.Size = new System.Drawing.Size(379, 34);
-            this.labelCache.TabIndex = 0;
-            this.labelCache.Text = "Cache";
-            this.labelCache.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelCache.AutoSize = true;
+            this.LabelCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LabelCache.Location = new System.Drawing.Point(4, 1);
+            this.LabelCache.Name = "LabelCache";
+            this.LabelCache.Size = new System.Drawing.Size(379, 34);
+            this.LabelCache.TabIndex = 0;
+            this.LabelCache.Text = "Cache";
+            this.LabelCache.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // RichTextBoxCache
+            // ButtonDatabaseToCache
             // 
-            this.RichTextBoxCache.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ButtonDatabaseToCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonDatabaseToCache.Location = new System.Drawing.Point(405, 213);
+            this.ButtonDatabaseToCache.Name = "ButtonDatabaseToCache";
+            this.ButtonDatabaseToCache.Size = new System.Drawing.Size(95, 32);
+            this.ButtonDatabaseToCache.TabIndex = 34;
+            this.ButtonDatabaseToCache.Text = "<<<";
+            this.ButtonDatabaseToCache.UseVisualStyleBackColor = true;
+            this.ButtonDatabaseToCache.Click += new System.EventHandler(this.ButtonDatabaseToCache_Click);
+            // 
+            // TableLayoutPanelDatabase
+            // 
+            this.TableLayoutPanelDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.RichTextBoxCache.Location = new System.Drawing.Point(4, 39);
-            this.RichTextBoxCache.Name = "RichTextBoxCache";
-            this.RichTextBoxCache.ReadOnly = true;
-            this.RichTextBoxCache.Size = new System.Drawing.Size(379, 376);
-            this.RichTextBoxCache.TabIndex = 0;
-            this.RichTextBoxCache.Text = "";
+            this.TableLayoutPanelDatabase.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.TableLayoutPanelDatabase.ColumnCount = 1;
+            this.TableLayoutPanelDatabase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TableLayoutPanelDatabase.Controls.Add(this.LabelDatabase, 0, 0);
+            this.TableLayoutPanelDatabase.Controls.Add(this.TreeViewDataBase, 0, 1);
+            this.TableLayoutPanelDatabase.Location = new System.Drawing.Point(506, 12);
+            this.TableLayoutPanelDatabase.Name = "TableLayoutPanelDatabase";
+            this.TableLayoutPanelDatabase.RowCount = 2;
+            this.TableLayoutPanelDatabase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.385093F));
+            this.TableLayoutPanelDatabase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.61491F));
+            this.TableLayoutPanelDatabase.Size = new System.Drawing.Size(387, 419);
+            this.TableLayoutPanelDatabase.TabIndex = 35;
+            this.TableLayoutPanelDatabase.TabStop = true;
             // 
-            // buttonDatabaseToCache
+            // LabelDatabase
             // 
-            this.buttonDatabaseToCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDatabaseToCache.Location = new System.Drawing.Point(405, 213);
-            this.buttonDatabaseToCache.Name = "buttonDatabaseToCache";
-            this.buttonDatabaseToCache.Size = new System.Drawing.Size(95, 32);
-            this.buttonDatabaseToCache.TabIndex = 34;
-            this.buttonDatabaseToCache.Text = "<<<";
-            this.buttonDatabaseToCache.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanelDatabase
-            // 
-            this.tableLayoutPanelDatabase.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanelDatabase.ColumnCount = 1;
-            this.tableLayoutPanelDatabase.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelDatabase.Controls.Add(this.labelDatabase, 0, 0);
-            this.tableLayoutPanelDatabase.Controls.Add(this.richTextBoxDatabase, 0, 1);
-            this.tableLayoutPanelDatabase.Location = new System.Drawing.Point(506, 12);
-            this.tableLayoutPanelDatabase.Name = "tableLayoutPanelDatabase";
-            this.tableLayoutPanelDatabase.RowCount = 2;
-            this.tableLayoutPanelDatabase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.385093F));
-            this.tableLayoutPanelDatabase.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.61491F));
-            this.tableLayoutPanelDatabase.Size = new System.Drawing.Size(387, 419);
-            this.tableLayoutPanelDatabase.TabIndex = 35;
-            this.tableLayoutPanelDatabase.TabStop = true;
-            // 
-            // labelDatabase
-            // 
-            this.labelDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.LabelDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelDatabase.AutoSize = true;
-            this.labelDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDatabase.Location = new System.Drawing.Point(4, 1);
-            this.labelDatabase.Name = "labelDatabase";
-            this.labelDatabase.Size = new System.Drawing.Size(379, 34);
-            this.labelDatabase.TabIndex = 0;
-            this.labelDatabase.Text = "Database";
-            this.labelDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelDatabase.AutoSize = true;
+            this.LabelDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LabelDatabase.Location = new System.Drawing.Point(4, 1);
+            this.LabelDatabase.Name = "LabelDatabase";
+            this.LabelDatabase.Size = new System.Drawing.Size(379, 34);
+            this.LabelDatabase.TabIndex = 0;
+            this.LabelDatabase.Text = "Database";
+            this.LabelDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // richTextBoxDatabase
+            // ButtonMinus
             // 
-            this.richTextBoxDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ButtonMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonMinus.Location = new System.Drawing.Point(12, 437);
+            this.ButtonMinus.Name = "ButtonMinus";
+            this.ButtonMinus.Size = new System.Drawing.Size(95, 32);
+            this.ButtonMinus.TabIndex = 36;
+            this.ButtonMinus.Text = "-";
+            this.ButtonMinus.UseVisualStyleBackColor = true;
+            this.ButtonMinus.Click += new System.EventHandler(this.ButtonMinus_Click);
+            // 
+            // ButtonPlus
+            // 
+            this.ButtonPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonPlus.Location = new System.Drawing.Point(113, 437);
+            this.ButtonPlus.Name = "ButtonPlus";
+            this.ButtonPlus.Size = new System.Drawing.Size(95, 32);
+            this.ButtonPlus.TabIndex = 37;
+            this.ButtonPlus.Text = "+";
+            this.ButtonPlus.UseVisualStyleBackColor = true;
+            this.ButtonPlus.Click += new System.EventHandler(this.ButtonPlus_Click);
+            // 
+            // ButtonValue
+            // 
+            this.ButtonValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonValue.Location = new System.Drawing.Point(214, 437);
+            this.ButtonValue.Name = "ButtonValue";
+            this.ButtonValue.Size = new System.Drawing.Size(95, 32);
+            this.ButtonValue.TabIndex = 38;
+            this.ButtonValue.Text = "Value";
+            this.ButtonValue.UseVisualStyleBackColor = true;
+            this.ButtonValue.Click += new System.EventHandler(this.ButtonValue_Click);
+            // 
+            // ButtonApply
+            // 
+            this.ButtonApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonApply.Location = new System.Drawing.Point(405, 437);
+            this.ButtonApply.Name = "ButtonApply";
+            this.ButtonApply.Size = new System.Drawing.Size(95, 32);
+            this.ButtonApply.TabIndex = 39;
+            this.ButtonApply.Text = "Apply";
+            this.ButtonApply.UseVisualStyleBackColor = true;
+            this.ButtonApply.Click += new System.EventHandler(this.ButtonApply_Click);
+            // 
+            // ButtonReset
+            // 
+            this.ButtonReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonReset.Location = new System.Drawing.Point(506, 437);
+            this.ButtonReset.Name = "ButtonReset";
+            this.ButtonReset.Size = new System.Drawing.Size(95, 32);
+            this.ButtonReset.TabIndex = 40;
+            this.ButtonReset.Text = "Reset";
+            this.ButtonReset.UseVisualStyleBackColor = true;
+            this.ButtonReset.Click += new System.EventHandler(this.ButtonReset_Click);
+            // 
+            // TreeViewDataBase
+            // 
+            this.TreeViewDataBase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxDatabase.Location = new System.Drawing.Point(4, 39);
-            this.richTextBoxDatabase.Name = "richTextBoxDatabase";
-            this.richTextBoxDatabase.ReadOnly = true;
-            this.richTextBoxDatabase.Size = new System.Drawing.Size(379, 376);
-            this.richTextBoxDatabase.TabIndex = 0;
-            this.richTextBoxDatabase.Text = "";
+            this.TreeViewDataBase.Location = new System.Drawing.Point(1, 36);
+            this.TreeViewDataBase.Margin = new System.Windows.Forms.Padding(0);
+            this.TreeViewDataBase.Name = "TreeViewDataBase";
+            this.TreeViewDataBase.Size = new System.Drawing.Size(385, 382);
+            this.TreeViewDataBase.TabIndex = 1;
             // 
-            // buttonPlus
+            // TreeViewCache
             // 
-            this.buttonPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonPlus.Location = new System.Drawing.Point(12, 437);
-            this.buttonPlus.Name = "buttonPlus";
-            this.buttonPlus.Size = new System.Drawing.Size(95, 32);
-            this.buttonPlus.TabIndex = 36;
-            this.buttonPlus.Text = "-";
-            this.buttonPlus.UseVisualStyleBackColor = true;
-            // 
-            // buttonMinus
-            // 
-            this.buttonMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonMinus.Location = new System.Drawing.Point(113, 437);
-            this.buttonMinus.Name = "buttonMinus";
-            this.buttonMinus.Size = new System.Drawing.Size(95, 32);
-            this.buttonMinus.TabIndex = 37;
-            this.buttonMinus.Text = "+";
-            this.buttonMinus.UseVisualStyleBackColor = true;
-            // 
-            // buttonValue
-            // 
-            this.buttonValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonValue.Location = new System.Drawing.Point(214, 437);
-            this.buttonValue.Name = "buttonValue";
-            this.buttonValue.Size = new System.Drawing.Size(95, 32);
-            this.buttonValue.TabIndex = 38;
-            this.buttonValue.Text = "Value";
-            this.buttonValue.UseVisualStyleBackColor = true;
-            // 
-            // buttonApply
-            // 
-            this.buttonApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonApply.Location = new System.Drawing.Point(405, 437);
-            this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(95, 32);
-            this.buttonApply.TabIndex = 39;
-            this.buttonApply.Text = "Apply";
-            this.buttonApply.UseVisualStyleBackColor = true;
-            // 
-            // buttonReset
-            // 
-            this.buttonReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonReset.Location = new System.Drawing.Point(506, 437);
-            this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(95, 32);
-            this.buttonReset.TabIndex = 40;
-            this.buttonReset.Text = "Reset";
-            this.buttonReset.UseVisualStyleBackColor = true;
+            this.TreeViewCache.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TreeViewCache.Location = new System.Drawing.Point(1, 36);
+            this.TreeViewCache.Margin = new System.Windows.Forms.Padding(0);
+            this.TreeViewCache.Name = "TreeViewCache";
+            this.TreeViewCache.Size = new System.Drawing.Size(385, 382);
+            this.TreeViewCache.TabIndex = 1;
             // 
             // Form1
             // 
@@ -195,41 +202,41 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(904, 480);
-            this.Controls.Add(this.buttonReset);
-            this.Controls.Add(this.buttonApply);
-            this.Controls.Add(this.buttonValue);
-            this.Controls.Add(this.buttonMinus);
-            this.Controls.Add(this.buttonPlus);
-            this.Controls.Add(this.tableLayoutPanelDatabase);
-            this.Controls.Add(this.buttonDatabaseToCache);
-            this.Controls.Add(this.tableLayoutPanelCache);
+            this.Controls.Add(this.ButtonReset);
+            this.Controls.Add(this.ButtonApply);
+            this.Controls.Add(this.ButtonValue);
+            this.Controls.Add(this.ButtonPlus);
+            this.Controls.Add(this.ButtonMinus);
+            this.Controls.Add(this.TableLayoutPanelDatabase);
+            this.Controls.Add(this.ButtonDatabaseToCache);
+            this.Controls.Add(this.TableLayoutPanelCache);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CachedDataBase";
-            this.tableLayoutPanelCache.ResumeLayout(false);
-            this.tableLayoutPanelCache.PerformLayout();
-            this.tableLayoutPanelDatabase.ResumeLayout(false);
-            this.tableLayoutPanelDatabase.PerformLayout();
+            this.TableLayoutPanelCache.ResumeLayout(false);
+            this.TableLayoutPanelCache.PerformLayout();
+            this.TableLayoutPanelDatabase.ResumeLayout(false);
+            this.TableLayoutPanelDatabase.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelCache;
-        private System.Windows.Forms.Label labelCache;
-        private System.Windows.Forms.RichTextBox RichTextBoxCache;
-        private System.Windows.Forms.Button buttonDatabaseToCache;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelDatabase;
-        private System.Windows.Forms.Label labelDatabase;
-        private System.Windows.Forms.RichTextBox richTextBoxDatabase;
-        private System.Windows.Forms.Button buttonPlus;
-        private System.Windows.Forms.Button buttonMinus;
-        private System.Windows.Forms.Button buttonValue;
-        private System.Windows.Forms.Button buttonApply;
-        private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.TableLayoutPanel TableLayoutPanelCache;
+        private System.Windows.Forms.Label LabelCache;
+        private System.Windows.Forms.Button ButtonDatabaseToCache;
+        private System.Windows.Forms.TableLayoutPanel TableLayoutPanelDatabase;
+        private System.Windows.Forms.Label LabelDatabase;
+        private System.Windows.Forms.Button ButtonMinus;
+        private System.Windows.Forms.Button ButtonPlus;
+        private System.Windows.Forms.Button ButtonValue;
+        private System.Windows.Forms.Button ButtonApply;
+        private System.Windows.Forms.Button ButtonReset;
+        private Tree.MyTreeView TreeViewCache;
+        private Tree.MyTreeView TreeViewDataBase;
     }
 }
 
