@@ -17,16 +17,29 @@ namespace Tree
         }
         public void LoadElementToCached(MyTreeView cachedTreeView)
         {
-            TreeNode temp = MyTreeViewDBTree.SelectedNode;
+            TreeNode CurrentNode = MyTreeViewDBTree.SelectedNode;
 
-            if (temp == null)
+            if (CurrentNode == null)
             {
                 throw new Exception("Не был выбран узел для переноса из Database в Cache.");
             }
-            if (temp != null)
+
+            //Check if the node has already been added
+            foreach (TreeNode tempNode in cachedTreeView.Nodes)
             {
-                cachedTreeView.Nodes.Add((TreeNode)temp.Clone());
+                TreeNode FoundNodeInDatabase = tempNode.FindNodeOnText(CurrentNode);
+                if (FoundNodeInDatabase != null)
+                {
+                    return;
+                }
             }
+
+            //First element in list - node(initial). Second element in list - node(copy). Third - parent node
+            List<TreeNode> listTreeNode = ListTreeNodeAndParent.AddWithCopy(CurrentNode);
+            cachedTreeView.Nodes.Add(listTreeNode[1]);
+
+            cachedTreeView.CheckHierarchi(cachedTreeView);
+
             cachedTreeView.ExpandAll();
         }
         public void SetDefaultTree(MyTreeView MyTreeViewDBTree)

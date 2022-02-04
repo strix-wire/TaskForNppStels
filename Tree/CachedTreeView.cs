@@ -76,7 +76,9 @@ namespace Tree
             {
                 throw new Exception("Был выбран удаленный элемент. Редактирование невозможно");
             }
+            ListTreeNodeAndParent.Add(currentNode);
             currentNode.Nodes.Add("value", "Node" + (mostIndexLastNode + 1));
+            MyTreeViewCachedTree.CheckHierarchi(MyTreeViewCachedTree);
             ExpandAllNodes();
         }
         public void RemoveNode()
@@ -90,31 +92,33 @@ namespace Tree
             {
                 throw new Exception("Был выбран удаленный элемент. Редактирование невозможно.");
             }
-            if (currentNode != null)
+
+            ListTreeNodeAndParent.Remove(currentNode);
+
+            //Run for all childs elements for current node
+
+            Queue<TreeNode> staging = new Queue<TreeNode>();
+            staging.Enqueue(currentNode);
+
+            while (staging.Count > 0)
             {
-                //Run for all childs elements for current node
+                currentNode = staging.Dequeue();
 
-                Queue<TreeNode> staging = new Queue<TreeNode>();
-                staging.Enqueue(currentNode);
+                currentNode.BackColor = System.Drawing.Color.Red;
+                currentNode.Tag = "No change";
 
-                while (staging.Count > 0)
+                foreach (TreeNode node in currentNode.Nodes)
                 {
-                    currentNode = staging.Dequeue();
-
-                    currentNode.BackColor = System.Drawing.Color.Red;
-                    currentNode.Tag = "No change";
-
-                    foreach (TreeNode node in currentNode.Nodes)
-                    {
-                        staging.Enqueue(node);
-                    }
+                    staging.Enqueue(node);
                 }
-
             }
+
+            MyTreeViewCachedTree.CheckHierarchi(MyTreeViewCachedTree);
         }
         public void ResetTree()
         {
             MyTreeViewCachedTree.Nodes.Clear();
+            ListTreeNodeAndParent.ListWithTreeNodeAndParent = new List<List<TreeNode>>();
         }
         public void MoveElementFromCacheToDatabase(DBTreeView dBTree)
         {
@@ -130,21 +134,83 @@ namespace Tree
             {
                 TreeNode SelectedNodeInDBTree = dBTree.MyTreeViewDBTree.FindNodeOnTextNode(i);
                 TreeNode temp = SelectedNodeInDBTree.Parent;
+
+                TreeNode LastNodeInCachee = i;
+                if (i.LastNode != null)
+                {
+                    i.MyLastNode(ref LastNodeInCachee);
+                }
+                TreeNode FixTreeNodeCachee = CheckChildrenNodeForCorrelations(SelectedNodeInDBTree, LastNodeInCachee, i);
+
                 SelectedNodeInDBTree.Remove();
 
                 if (temp != null)
                 {
-                    temp.Nodes.Add((TreeNode)i.Clone());
+                    temp.Nodes.Add((TreeNode)FixTreeNodeCachee.Clone());
                 }
 
                 //SelectedNodeInDBTree already parent
-                if (temp==null)
+                if (temp == null)
                 {
-                    dBTree.MyTreeViewDBTree.Nodes.Add((TreeNode)i.Clone());
+                    dBTree.MyTreeViewDBTree.Nodes.Add((TreeNode)FixTreeNodeCachee.Clone());
                 }
             }
             ResetTree();
             dBTree.ExpandAllNodes();
+        }
+        //Validates and completes Cached child nodes to migrate to DbTree
+        private TreeNode CheckChildrenNodeForCorrelations(TreeNode TreeNodeDBTree, TreeNode lastNodeInCachee, TreeNode treeNodeCachee)
+        {
+            //flag that matched the last element of the cache - dBTree
+            bool flag = false;
+
+            //flag to mark subsequent elements removed
+            bool flagDelete = false; 
+
+            Queue<TreeNode> staging = new Queue<TreeNode>();
+            staging.Enqueue(TreeNodeDBTree);
+            
+            while (staging.Count > 0)
+            {
+                TreeNodeDBTree = staging.Dequeue();
+
+                if (flag)
+                {
+                    TreeNode temp = (TreeNode)TreeNodeDBTree.Clone();
+                    temp.Nodes.Clear();
+                    if (flagDelete)
+                    {
+                        temp.BackColor = System.Drawing.Color.Red;
+                        temp.Tag = "No change";
+                    }
+                    if (treeNodeCachee.LastNode != null)
+                    {
+                        TreeNode myLastNode = new TreeNode();
+                        treeNodeCachee.MyLastNode(ref myLastNode);
+                        myLastNode.Nodes.Add(temp);
+                    }
+                    else
+                    {
+                        treeNodeCachee.Nodes.Add(temp);
+                    }
+                }
+
+                if (lastNodeInCachee.Text == TreeNodeDBTree.Text)
+                {
+                    flag = true;
+                    if (lastNodeInCachee.BackColor == System.Drawing.Color.Red)
+                    {
+                        flagDelete = true;
+                    }
+                }
+
+                foreach (TreeNode node in TreeNodeDBTree.Nodes)
+                {
+                    staging.Enqueue(node);
+                }
+            }
+
+            return treeNodeCachee;
         }
         public void ExpandAllNodes()
         {
