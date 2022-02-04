@@ -56,5 +56,29 @@ namespace Tree
                 RecursiveFindNodeOnTextNode(i, ref findNode, compareNode);
             }
         }
+        //Check right hierarchy
+        public void CheckHierarchi(MyTreeView myTreeView)
+        {
+            List<List<TreeNode>> listList = ListTreeNodeAndParent.ListWithTreeNodeAndParent;
+
+            foreach (var Main in listList)
+            {
+                foreach (var Slave in listList)
+                {
+                    if (Main[1] == Slave[1])
+                    {
+                        continue;
+                    }
+                    if (Slave[2] == Main[0] & Slave[2] != null)
+                    {
+                        myTreeView.Nodes.Remove(Slave[1]);
+                        Main[1].Nodes.Add(Slave[1]);
+
+                        Main[0] = null;
+                    }
+                }
+            }
+
+        }
     }
 }
