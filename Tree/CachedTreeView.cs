@@ -62,9 +62,20 @@ namespace Tree
                 }
             }
         }
-        public void AddChildNode()
+        public void AddChildNode(DBTreeView dBTreeView)
         {
-            int mostIndexLastNode = MyTreeViewCachedTree.LastIndexInTreeView();
+            //calculate the largest index
+            int mostIndexLastNodeDbTree = dBTreeView.MyTreeViewDBTree.LastIndexInTreeView();
+            int mostIndexLastNodeCachedTree = MyTreeViewCachedTree.LastIndexInTreeView();
+            int IndexLastNode;
+            if (mostIndexLastNodeDbTree > mostIndexLastNodeCachedTree)
+            {
+                IndexLastNode = mostIndexLastNodeDbTree;
+            }
+            else
+            {
+                IndexLastNode = mostIndexLastNodeCachedTree;
+            }
 
             //find which node is selected
             TreeNode currentNode = MyTreeViewCachedTree.SelectedNode;
@@ -77,10 +88,11 @@ namespace Tree
                 throw new Exception("Был выбран удаленный элемент. Редактирование невозможно");
             }
             ListTreeNodeAndParent.Add(currentNode);
-            currentNode.Nodes.Add("value", "Node" + (mostIndexLastNode + 1));
+            currentNode.Nodes.Add("value", "Node" + (IndexLastNode + 1));
             MyTreeViewCachedTree.CheckHierarchi(MyTreeViewCachedTree);
             ExpandAllNodes();
         }
+
         public void RemoveNode()
         {
             TreeNode currentNode = MyTreeViewCachedTree.SelectedNode;
@@ -130,7 +142,7 @@ namespace Tree
                 return;
             }
 
-            foreach (var i in ListAllParents)
+            foreach (TreeNode i in ListAllParents)
             {
                 TreeNode SelectedNodeInDBTree = dBTree.MyTreeViewDBTree.FindNodeOnTextNode(i);
                 TreeNode temp = SelectedNodeInDBTree.Parent;
@@ -140,7 +152,14 @@ namespace Tree
                 {
                     i.MyLastNode(ref LastNodeInCachee);
                 }
-                TreeNode FixTreeNodeCachee = CheckChildrenNodeForCorrelations(SelectedNodeInDBTree, LastNodeInCachee, i);
+
+                bool flagNever = false;
+                TreeNode FixTreeNodeCachee = CheckChildrenNodeForCorrelations(SelectedNodeInDBTree, LastNodeInCachee, i, ref flagNever);
+
+                if (flagNever == false)
+                {
+                    FixTreeNodeCachee.Nodes.Add((TreeNode)SelectedNodeInDBTree.FirstNode.Clone());
+                }
 
                 SelectedNodeInDBTree.Remove();
 
@@ -159,13 +178,15 @@ namespace Tree
             dBTree.ExpandAllNodes();
         }
         //Validates and completes Cached child nodes to migrate to DbTree
-        private TreeNode CheckChildrenNodeForCorrelations(TreeNode TreeNodeDBTree, TreeNode lastNodeInCachee, TreeNode treeNodeCachee)
+        private TreeNode CheckChildrenNodeForCorrelations(TreeNode TreeNodeDBTree, TreeNode lastNodeInCachee, TreeNode treeNodeCachee, ref bool flagNever)
         {
             //flag that matched the last element of the cache - dBTree
             bool flag = false;
 
             //flag to mark subsequent elements removed
-            bool flagDelete = false; 
+            bool flagDelete = false;
+
+            TreeNode buffer = new TreeNode();
 
             Queue<TreeNode> staging = new Queue<TreeNode>();
             staging.Enqueue(TreeNodeDBTree);
@@ -198,6 +219,7 @@ namespace Tree
                 if (lastNodeInCachee.Text == TreeNodeDBTree.Text)
                 {
                     flag = true;
+                    flagNever = true;
                     if (lastNodeInCachee.BackColor == System.Drawing.Color.Red)
                     {
                         flagDelete = true;
@@ -207,6 +229,7 @@ namespace Tree
                 foreach (TreeNode node in TreeNodeDBTree.Nodes)
                 {
                     staging.Enqueue(node);
+ 
                 }
             }
 

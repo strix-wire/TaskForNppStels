@@ -52,7 +52,7 @@ namespace WindowsFormsApp1
         {
             try
             {
-                cachedTreeView.AddChildNode();
+                cachedTreeView.AddChildNode(dBTreeView);
             }
             catch (Exception exc)
             {
