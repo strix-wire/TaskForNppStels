@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Tree
@@ -137,103 +138,115 @@ namespace Tree
             List<TreeNode> ListAllParents = MyTreeViewCachedTree.GetListAllParents();
 
             //CachedTreeView is empty
-            if (ListAllParents.Count==0)
+            if (ListAllParents.Count == 0)
             {
                 return;
             }
 
-            foreach (TreeNode i in ListAllParents)
+            foreach (TreeNode parentTreeNodeCached in ListAllParents)
             {
-                TreeNode SelectedNodeInDBTree = dBTree.MyTreeViewDBTree.FindNodeOnTextNode(i);
-                TreeNode temp = SelectedNodeInDBTree.Parent;
+                TreeNode cloneCurrentTreeNodeCached = (TreeNode)parentTreeNodeCached.Clone();
+                TreeNode changeableTreeNodeInDbTree = dBTree.MyTreeViewDBTree.FindNodeOnTextNode(cloneCurrentTreeNodeCached.Text);
 
-                TreeNode LastNodeInCachee = i;
-                if (i.LastNode != null)
+                TreeNode cloneCurrentTreeNodeParentCached = changeableTreeNodeInDbTree.Parent;
+
+                //---
+                //Проверить узлы которые уже есть в DbTree, чтобы они не удалились
+                //---
+                TreeNode selectedNodeDbForParentNodeCached = dBTree.MyTreeViewDBTree.FindNodeOnTextNode(parentTreeNodeCached.Text);
+                CheckNodesThatAlreadyExist(selectedNodeDbForParentNodeCached, cloneCurrentTreeNodeCached);
+                //---
+
+                changeableTreeNodeInDbTree.Remove();
+
+                if (cloneCurrentTreeNodeParentCached != null)
                 {
-                    i.MyLastNode(ref LastNodeInCachee);
+                    cloneCurrentTreeNodeParentCached.Nodes.Add(cloneCurrentTreeNodeCached);
+                }
+                else
+                {
+                    dBTree.MyTreeViewDBTree.Nodes.Add(cloneCurrentTreeNodeCached);
                 }
 
-                bool flagNever = false;
-                TreeNode FixTreeNodeCachee = CheckChildrenNodeForCorrelations(SelectedNodeInDBTree, LastNodeInCachee, i, ref flagNever);
-
-                if (flagNever == false)
-                {
-                    FixTreeNodeCachee.Nodes.Add((TreeNode)SelectedNodeInDBTree.FirstNode.Clone());
-                }
-
-                SelectedNodeInDBTree.Remove();
-
-                if (temp != null)
-                {
-                    temp.Nodes.Add((TreeNode)FixTreeNodeCachee.Clone());
-                }
-
-                //SelectedNodeInDBTree already parent
-                if (temp == null)
-                {
-                    dBTree.MyTreeViewDBTree.Nodes.Add((TreeNode)FixTreeNodeCachee.Clone());
-                }
+                //---
+                //Покрасить и нельзя удалить
+                //---
+                CheckChildrenNodeForCorrelations(cloneCurrentTreeNodeCached, dBTree);
+                //---
             }
+
             ResetTree();
+            dBTree.MyTreeViewDBTree.Sort();
+            //SortOnNamesGlobalParents(dBTree);
             dBTree.ExpandAllNodes();
         }
-        //Validates and completes Cached child nodes to migrate to DbTree
-        private TreeNode CheckChildrenNodeForCorrelations(TreeNode TreeNodeDBTree, TreeNode lastNodeInCachee, TreeNode treeNodeCachee, ref bool flagNever)
+
+        //Check nodes that are already in DbTree so that they are not deleted
+        private void CheckNodesThatAlreadyExist(TreeNode treeNodeDb, TreeNode treeNodeCachedClone)
         {
-            //flag that matched the last element of the cache - dBTree
-            bool flag = false;
-
-            //flag to mark subsequent elements removed
-            bool flagDelete = false;
-
-            TreeNode buffer = new TreeNode();
-
             Queue<TreeNode> staging = new Queue<TreeNode>();
-            staging.Enqueue(TreeNodeDBTree);
-            
+            staging.Enqueue(treeNodeDb);
+
             while (staging.Count > 0)
             {
-                TreeNodeDBTree = staging.Dequeue();
+                treeNodeDb = staging.Dequeue();
 
-                if (flag)
+                TreeNode backup = treeNodeCachedClone.FindNodeOnText(treeNodeDb);
+
+
+                if (backup == null)
                 {
-                    TreeNode temp = (TreeNode)TreeNodeDBTree.Clone();
-                    temp.Nodes.Clear();
-                    if (flagDelete)
-                    {
-                        temp.BackColor = System.Drawing.Color.Red;
-                        temp.Tag = "No change";
-                    }
-                    if (treeNodeCachee.LastNode != null)
-                    {
-                        TreeNode myLastNode = new TreeNode();
-                        treeNodeCachee.MyLastNode(ref myLastNode);
-                        myLastNode.Nodes.Add(temp);
-                    }
-                    else
-                    {
-                        treeNodeCachee.Nodes.Add(temp);
-                    }
+                    TreeNode backup2 = treeNodeCachedClone.FindNodeOnText(treeNodeDb.Parent);
+                    backup2.Nodes.Add((TreeNode)treeNodeDb.Clone());
                 }
 
-                if (lastNodeInCachee.Text == TreeNodeDBTree.Text)
-                {
-                    flag = true;
-                    flagNever = true;
-                    if (lastNodeInCachee.BackColor == System.Drawing.Color.Red)
-                    {
-                        flagDelete = true;
-                    }
-                }
-
-                foreach (TreeNode node in TreeNodeDBTree.Nodes)
+                foreach (TreeNode node in treeNodeDb.Nodes)
                 {
                     staging.Enqueue(node);
- 
+
                 }
             }
+        }
+        private void CheckChildrenNodeForCorrelations(TreeNode treeNodeCached, DBTreeView dBTree)
+        {
+            Queue<TreeNode> staging = new Queue<TreeNode>();
+            staging.Enqueue(treeNodeCached);
 
-            return treeNodeCachee;
+            while (staging.Count > 0)
+            {
+                treeNodeCached = staging.Dequeue();
+
+                if (treeNodeCached.BackColor == System.Drawing.Color.Red)
+                {
+                    TreeNode backup = dBTree.MyTreeViewDBTree.FindNodeOnTextNode(treeNodeCached);
+                    ChangeColor(backup);
+                }
+
+                foreach (TreeNode node in treeNodeCached.Nodes)
+                {
+                    staging.Enqueue(node);
+
+                }
+            }
+        }
+        private void ChangeColor(TreeNode treeNode)
+        {
+            Queue<TreeNode> staging = new Queue<TreeNode>();
+            staging.Enqueue(treeNode);
+
+            while (staging.Count > 0)
+            {
+                treeNode = staging.Dequeue();
+
+                treeNode.BackColor = System.Drawing.Color.Red;
+                treeNode.Tag = "No change";
+
+                foreach (TreeNode node in treeNode.Nodes)
+                {
+                    staging.Enqueue(node);
+
+                }
+            }
         }
         public void ExpandAllNodes()
         {

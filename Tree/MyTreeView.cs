@@ -32,24 +32,30 @@ namespace Tree
             TreeNode FindNode = null;
             foreach (TreeNode i in this.Nodes)
             {
+                RecursiveFindNodeOnTextNode(i, ref FindNode, compareNode.Text);
+            }
+
+            return FindNode;
+        }
+        public TreeNode FindNodeOnTextNode(string compareNode)
+        {
+            TreeNode FindNode = null;
+            foreach (TreeNode i in this.Nodes)
+            {
                 RecursiveFindNodeOnTextNode(i, ref FindNode, compareNode);
             }
 
-            if (FindNode == null)
-            {
-                throw new Exception("Равные узлы не найдены");
-            }
             return FindNode;
         }
-        private void RecursiveFindNodeOnTextNode(TreeNode currentTreeNode, ref TreeNode findNode, TreeNode compareNode)
+        private void RecursiveFindNodeOnTextNode(TreeNode currentTreeNode, ref TreeNode findNode, string compareNode)
         {
-            if (currentTreeNode.Text == compareNode.Text)
+            if (currentTreeNode.Text == compareNode)
             {
                 findNode = currentTreeNode;
             }
             foreach (TreeNode i in currentTreeNode.Nodes)
             {
-                if (i.Text == compareNode.Text)
+                if (i.Text == compareNode)
                 {
                     findNode = i;
                 }
@@ -73,12 +79,10 @@ namespace Tree
                     {
                         myTreeView.Nodes.Remove(Slave[1]);
                         Main[1].Nodes.Add(Slave[1]);
-
-                        Main[0] = null;
                     }
                 }
             }
-
+            
         }
     }
 }
