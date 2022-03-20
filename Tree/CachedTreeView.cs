@@ -151,7 +151,7 @@ namespace Tree
                 TreeNode cloneCurrentTreeNodeParentCached = changeableTreeNodeInDbTree.Parent;
 
                 //---
-                //Проверить узлы которые уже есть в DbTree, чтобы они не удалились
+                //Check nodes that are already in DbTree so that they are not deleted
                 //---
                 TreeNode selectedNodeDbForParentNodeCached = dBTree.MyTreeViewDBTree.FindNodeOnTextNode(parentTreeNodeCached.Text);
                 CheckNodesThatAlreadyExist(selectedNodeDbForParentNodeCached, cloneCurrentTreeNodeCached);
@@ -169,15 +169,14 @@ namespace Tree
                 }
 
                 //---
-                //Покрасить и нельзя удалить
+                //Can't be painted or removed
                 //---
                 CheckChildrenNodeForCorrelations(cloneCurrentTreeNodeCached, dBTree);
                 //---
             }
 
             ResetTree();
-            dBTree.MyTreeViewDBTree.Sort();
-            //SortOnNamesGlobalParents(dBTree);
+            dBTree.MyTreeViewDBTree.TreeViewNodeSorter = new MyTreeViewSort();
             dBTree.ExpandAllNodes();
         }
 

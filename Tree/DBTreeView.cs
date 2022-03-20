@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Tree
 {
-    public class DBTreeView
+    public class DBTreeView : IComparable
     {
         public readonly MyTreeView MyTreeViewDBTree;
         public DBTreeView(MyTreeView dBTree)
@@ -56,6 +56,11 @@ namespace Tree
         public void ExpandAllNodes()
         {
             MyTreeViewDBTree.ExpandAll();
+        }
+
+        public int CompareTo(object obj)
+        {
+            return 0;
         }
     }
 }
